@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Play Sound View Controller-->
         <scene sceneID="ptj-5V-mB6">
             <objects>
-                <viewController id="lug-GO-e5O" sceneMemberID="viewController">
+                <viewController id="lug-GO-e5O" customClass="PlaySoundViewController" customModule="PitchPerfect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RFx-e4-3ii"/>
                         <viewControllerLayoutGuide type="bottom" id="CEa-CX-BD0"/>
@@ -40,7 +40,6 @@
                                 <state key="normal" image="stopRecordingButton"/>
                                 <connections>
                                     <action selector="stopRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nrr-CJ-SI9"/>
-                                    <segue destination="lug-GO-e5O" kind="show" id="LXx-E5-g6S"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBr-Us-2QD">
@@ -72,6 +71,7 @@
                         <outlet property="recordButton" destination="JPD-ew-lCO" id="xUr-rk-H56"/>
                         <outlet property="recordingLabel" destination="xBr-Us-2QD" id="ntn-sA-gFZ"/>
                         <outlet property="stopRecordingButton" destination="e2n-Hs-r1R" id="cor-rN-j9b"/>
+                        <segue destination="lug-GO-e5O" kind="show" identifier="stopRecording" id="aQs-kr-Wfo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
