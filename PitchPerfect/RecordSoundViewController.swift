@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RecordSoundViewController.swift
 //  PitchPerfect
 //
 //  Created by Dinu Kumarasiri on 6/5/16.
@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import AVFoundation
 
-class ViewController: UIViewController {
+class RecordSoundViewController: UIViewController {
 
     @IBOutlet weak var recordingLabel: UILabel!
     @IBOutlet weak var stopRecordingButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
+    
+    var audioRecorder: AVAudioRecorder!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,24 @@ class ViewController: UIViewController {
         recordingLabel.text="Recording in progress"
         stopRecordingButton.enabled = true
         recordButton.enabled = false
+
+        //setting a path to store the recorder audio
+        let dirpath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let recordingName = "recordedVoice.wav"
+        let pathArray = [dirpath, recordingName]
+        let filePath = NSURL.fileURLWithPathComponents(pathArray)
+        print (filePath)
+        
+        // get the audio recording instance
+        let session = AVAudioSession.sharedInstance()
+        try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        
+        // recording
+        try! audioRecorder = AVAudioRecorder(URL: filePath!, settings: [:])
+        audioRecorder.meteringEnabled = true
+        audioRecorder.prepareToRecord()
+        audioRecorder.record()
+        
     }
 
     @IBAction func stopRecording(sender: AnyObject) {
@@ -36,6 +57,11 @@ class ViewController: UIViewController {
         stopRecordingButton.enabled = false
         recordButton.enabled = true
         recordingLabel.text = "Tap to Record"
+        
+        //stop recording
+        audioRecorder.stop()
+        let audioSession =  AVAudioSession.sharedInstance()
+        try! audioSession.setActive(false)
     }
     
     override func viewWillAppear(animated: Bool) {
